@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { FormControl } from '@material-ui/core';
-import {
+import { CardContent, 
+  FormControl, 
   MenuItem,
   Select,
-} from "@material-ui/core"
+  Card, } from '@material-ui/core';
 import InfoBox from './InfoBox';
 import Vaccinebox from './Vaccinebox';
+import Map from './Map';
 import './App.css';
 
 function App() {
@@ -39,36 +40,43 @@ function App() {
 
   return ( //BEM NAMING CONVENTION
     <div className="app">
-      <div className="app__header">
-        <h1>Coronavirus Tracker</h1>
-        <FormControl className="app_dropdown">
-          <Select variant="outlined" onChange={onCountryChange} value={country}>
-            <MenuItem value="worldwide"> Worldwide </MenuItem>
-            {
-              countries.map(country => (
-                <MenuItem value={country.value}>{country.name}</MenuItem>
-              ))
-            }
-          </Select>
-        </FormControl>
+      <div className="app__left">
+        <div className="app__header">
+          <h1>Coronavirus Tracker</h1>
+          <FormControl className="app_dropdown">
+            <Select variant="outlined" onChange={onCountryChange} value={country}>
+              <MenuItem value="worldwide"> Worldwide </MenuItem>
+              {
+                countries.map(country => (
+                  <MenuItem value={country.value}>{country.name}</MenuItem>
+                ))
+              }
+            </Select>
+          </FormControl>
+
+        </div>
+
+        <div className="app__stats">
+          <InfoBox title="Cases" cases={123} total={2000} />
+
+          <InfoBox title="Recovered" cases={42536} total={3000} />
+
+          <InfoBox title="Deaths" cases={134645723} total={4000} />
+
+          <Vaccinebox title="Vaccine rollout" totalVaccinated={234} peopleVaccinated={3456} peopleFullyVaccinated={4563} />
+        </div>
+        <Map />
       </div>
-
-      <div className="app__stats">
-        <InfoBox title="Cases" cases={123} total={2000}/>
-
-          <InfoBox title="Recovered" cases={42536} total={3000}/>
-
-            <InfoBox title="Deaths" cases={134645723} total={4000}/>
-          
-          <Vaccinebox title="Vaccine rollout" totalVaccinated={234} peopleVaccinated={3456} peopleFullyVaccinated={4563}/>
-      </div>
+      <Card className="app__right">
+        <CardContent>
+        <h3> Live cases by country</h3>
+        <h3> Worldwide cases by country</h3>
+          {/* Table */}
+          {/* Graph */}
+        </CardContent>
 
 
-
-      {/* Table */}
-      {/* Graph */}
-
-      {/* Map */}
+      </Card>
     </div>
   );
 }
