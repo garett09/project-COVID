@@ -4,6 +4,8 @@ import {
   MenuItem,
   Select,
 } from "@material-ui/core"
+import InfoBox from './InfoBox';
+import Vaccinebox from './Vaccinebox';
 import './App.css';
 
 function App() {
@@ -30,10 +32,10 @@ function App() {
     }
     getCountriesData();
   }, []);
-const onCountryChange = (event) => {
-  const countryCode = event.target.value;
-  setCountry(countryCode);
-};
+  const onCountryChange = (event) => {
+    const countryCode = event.target.value;
+    setCountry(countryCode);
+  };
 
   return ( //BEM NAMING CONVENTION
     <div className="app">
@@ -41,7 +43,7 @@ const onCountryChange = (event) => {
         <h1>Coronavirus Tracker</h1>
         <FormControl className="app_dropdown">
           <Select variant="outlined" onChange={onCountryChange} value={country}>
-          <MenuItem value ="worldwide"> Worldwide </MenuItem>
+            <MenuItem value="worldwide"> Worldwide </MenuItem>
             {
               countries.map(country => (
                 <MenuItem value={country.value}>{country.name}</MenuItem>
@@ -52,14 +54,16 @@ const onCountryChange = (event) => {
       </div>
 
       <div className="app__stats">
-      {/* Infobox = Cases */}
-      {/* Infobox  = Recoveries*/}
-      {/* Infobox  = Deaths*/}
+        <InfoBox title="Cases" cases={123} total={2000}/>
 
+          <InfoBox title="Recovered" cases={42536} total={3000}/>
 
+            <InfoBox title="Deaths" cases={134645723} total={4000}/>
+          
+          <Vaccinebox title="Vaccine rollout" totalVaccinated={234} peopleVaccinated={3456} peopleFullyVaccinated={4563}/>
       </div>
 
-      
+
 
       {/* Table */}
       {/* Graph */}
