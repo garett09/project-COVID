@@ -8,6 +8,7 @@ import './App.css';
 
 function App() {
   const [countries, setCountries] = useState([]);
+  const [country, setCountry] = useState(['worldwide']);
   //API https://disease.sh/v3/covid-19/countries
   //STATE = How to write a variable in react
   //useEEFFECT: run a piece of code based on a given condition
@@ -29,12 +30,18 @@ function App() {
     }
     getCountriesData();
   }, []);
+const onCountryChange = (event) => {
+  const countryCode = event.target.value;
+  setCountry(countryCode);
+};
+
   return ( //BEM NAMING CONVENTION
     <div className="app">
       <div className="app__header">
         <h1>Coronavirus Tracker</h1>
         <FormControl className="app_dropdown">
-          <Select variant="outlined" value="ABC">
+          <Select variant="outlined" onChange={onCountryChange} value={country}>
+          <MenuItem value ="worldwide"> Worldwide </MenuItem>
             {
               countries.map(country => (
                 <MenuItem value={country.value}>{country.name}</MenuItem>
@@ -44,14 +51,15 @@ function App() {
         </FormControl>
       </div>
 
+      <div className="app__stats">
+      {/* Infobox = Cases */}
+      {/* Infobox  = Recoveries*/}
+      {/* Infobox  = Deaths*/}
 
 
-      {/* Header */}
-      {/* Title + Select input dropdown field */}
+      </div>
 
-      {/* Infobox */}
-      {/* Infobox */}
-      {/* Infobox */}
+      
 
       {/* Table */}
       {/* Graph */}
