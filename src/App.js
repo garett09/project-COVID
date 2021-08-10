@@ -10,6 +10,8 @@ import InfoBox from './InfoBox';
 import Map from './Map';
 import Table from './Table';
 import './App.css';
+import { sortData } from "./util";
+
 
 
 function App() {
@@ -41,7 +43,8 @@ function App() {
               value: country.countryInfo.iso3 //USA, PH, IND
             }
           ));
-          setTableData(data)
+          const sortedData = sortData(data);
+          setTableData(sortedData)
           setCountries(countries);
         });
     }
