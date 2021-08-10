@@ -9,7 +9,7 @@ function Vaccinebox({ title, totalVaccinated, peopleVaccinated, peopleFullyVacci
                 <Typography classname="vaccineBox__title" color="textSecondary">
                     {title}</Typography>
 
-                <h2 className="vaccineBox__total">{totalVaccinated} people vaccinated</h2>
+                <h2 className="vaccineBox__total">{totalVaccinated}</h2>
                 {/*cases*/}
                 <Typography classname="vaccineBox__peopleVaccinated" color="textSecondary">
                     {peopleVaccinated} 
