@@ -5,13 +5,13 @@ import { CardContent,
   Select,
   Card, } from '@material-ui/core';
 import InfoBox from './InfoBox';
-import Vaccinebox from './Vaccinebox';
 import Map from './Map';
 import './App.css';
 
 function App() {
   const [countries, setCountries] = useState([]);
   const [country, setCountry] = useState(['worldwide']);
+  const [countryInfo, setCountryInfo] = useState({});
   //API https://disease.sh/v3/covid-19/countries
   //STATE = How to write a variable in react
   //useEEFFECT: run a piece of code based on a given condition
@@ -53,17 +53,15 @@ function App() {
               }
             </Select>
           </FormControl>
-
         </div>
 
         <div className="app__stats">
-          <InfoBox title="Cases" cases={123} total={2000} />
+          <InfoBox title="Cases" cases={countryInfo.todayCases} total={countryInfo.cases} />
 
-          <InfoBox title="Recovered" cases={42536} total={3000} />
+          <InfoBox title="Recovered" cases={countryInfo.todayRecovered} total={countryInfo.recovered} />
 
-          <InfoBox title="Deaths" cases={134645723} total={4000} />
+          <InfoBox title="Deaths" cases={countryInfo.todayDeaths} total={countryInfo.deaths} />
 
-          <Vaccinebox title="Vaccine rollout" totalVaccinated={234} peopleVaccinated={3456} peopleFullyVaccinated={4563} />
         </div>
         <Map />
       </div>
@@ -74,8 +72,6 @@ function App() {
           {/* Table */}
           {/* Graph */}
         </CardContent>
-
-
       </Card>
     </div>
   );
