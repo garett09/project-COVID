@@ -1,24 +1,29 @@
 import React, { useState, useEffect } from "react";
-import { CardContent, 
-  FormControl, 
+import {
+  CardContent,
+  FormControl,
   MenuItem,
   Select,
-  Card, } from '@material-ui/core';
+  Card,
+} from '@material-ui/core';
 import InfoBox from './InfoBox';
 import Map from './Map';
+import Table from './Table';
 import './App.css';
+
 
 function App() {
   const [countries, setCountries] = useState([]);
   const [country, setCountry] = useState(['worldwide']);
   const [countryInfo, setCountryInfo] = useState({});
+  const [tableData, setTableData] = useState([]);
 
   useEffect(() => {
     fetch('https://disease.sh/v3/covid-19/all')
-    .then (response => response.json())
-    .then (data =>{
-      setCountryInfo(data)
-    });
+      .then(response => response.json())
+      .then(data => {
+        setCountryInfo(data)
+      });
   }, [])
   //API https://disease.sh/v3/covid-19/countries
   //STATE = How to write a variable in react
@@ -32,10 +37,11 @@ function App() {
         .then((data) => {
           const countries = data.map((country) => (
             {
-              name: country.country,
-              value: country.countryInfo.iso3
+              name: country.country, //USA, PHILIPPINES, INDIA, AT IBA PA
+              value: country.countryInfo.iso3 //USA, PH, IND
             }
           ));
+          setTableData(data)
           setCountries(countries);
         });
     }
@@ -47,18 +53,18 @@ function App() {
     const countryCode = event.target.value;
 
     const url =
-    countryCode === "worldwide"
-      ? "https://disease.sh/v3/covid-19/all"
-      : `https://disease.sh/v3/covid-19/countries/${countryCode}`;
+      countryCode === "worldwide"
+        ? "https://disease.sh/v3/covid-19/all"
+        : `https://disease.sh/v3/covid-19/countries/${countryCode}`;
 
     await fetch(url)
-    .then(response => response.json())
-    .then (data =>{
-      setCountry(countryCode);
+      .then(response => response.json())
+      .then(data => {
+        setCountry(countryCode);
 
-      setCountryInfo(data);
+        setCountryInfo(data);
 
-    });
+      });
     console.log("sdfsdfsdfsd", countryInfo)
 
   };
@@ -81,25 +87,26 @@ function App() {
         </div>
 
         <div className="app__stats">
-          <InfoBox title="Cases" 
-          cases={countryInfo.todayCases} 
-          total={countryInfo.cases} />
+          <InfoBox title="Cases"
+            cases={countryInfo.todayCases}
+            total={countryInfo.cases} />
 
-          <InfoBox title="Recovered" 
-          cases={countryInfo.todayRecovered} 
-          total={countryInfo.recovered} />
+          <InfoBox title="Recovered"
+            cases={countryInfo.todayRecovered}
+            total={countryInfo.recovered} />
 
-          <InfoBox title="Deaths" 
-          cases={countryInfo.todayDeaths} 
-          total={countryInfo.deaths} />
+          <InfoBox title="Deaths"
+            cases={countryInfo.todayDeaths}
+            total={countryInfo.deaths} />
 
         </div>
         <Map />
       </div>
       <Card className="app__right">
         <CardContent>
-        <h3> Live cases by country</h3>
-        <h3> Worldwide cases by country</h3>
+          <h3> Live cases by country</h3>
+          <Table countries={tableData} />
+          <h3> Worldwide cases by country</h3>
           {/* Table */}
           {/* Graph */}
         </CardContent>
