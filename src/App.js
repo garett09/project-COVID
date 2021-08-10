@@ -12,6 +12,14 @@ function App() {
   const [countries, setCountries] = useState([]);
   const [country, setCountry] = useState(['worldwide']);
   const [countryInfo, setCountryInfo] = useState({});
+
+  useEffect(() => {
+    fetch('https://disease.sh/v3/covid-19/all')
+    .then (response => response.json())
+    .then (data =>{
+      setCountryInfo(data)
+    });
+  }, [])
   //API https://disease.sh/v3/covid-19/countries
   //STATE = How to write a variable in react
   //useEEFFECT: run a piece of code based on a given condition
@@ -73,11 +81,17 @@ function App() {
         </div>
 
         <div className="app__stats">
-          <InfoBox title="Cases" cases={countryInfo.todayCases} total={countryInfo.cases} />
+          <InfoBox title="Cases" 
+          cases={countryInfo.todayCases} 
+          total={countryInfo.cases} />
 
-          <InfoBox title="Recovered" cases={countryInfo.todayRecovered} total={countryInfo.recovered} />
+          <InfoBox title="Recovered" 
+          cases={countryInfo.todayRecovered} 
+          total={countryInfo.recovered} />
 
-          <InfoBox title="Deaths" cases={countryInfo.todayDeaths} total={countryInfo.deaths} />
+          <InfoBox title="Deaths" 
+          cases={countryInfo.todayDeaths} 
+          total={countryInfo.deaths} />
 
         </div>
         <Map />
