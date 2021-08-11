@@ -3,8 +3,10 @@ import { Line } from "react-chartjs-2";
 import numeral from "numeral";
 
 const options = {
-  legend: {
-    display: false,
+  plugins: {
+    legend: {
+      display: false,
+    }
   },
   elements: {
     point: {
@@ -31,7 +33,7 @@ const options = {
         },
       },
     ],
-    yAxes: [
+    y: [
       {
         gridLines: {
           display: false,
@@ -85,7 +87,7 @@ function LineGraph({ casesType = "cases" }) {
 
   return (
     <div>
-      {data&& data.length > 0 && (
+      {data && data.length > 0 && (
         <Line
           data={{
             datasets: [
