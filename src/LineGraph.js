@@ -33,7 +33,7 @@ const options = {
         },
       },
     ],
-    y: [
+    y: 
       {
         gridLines: {
           display: false,
@@ -45,7 +45,6 @@ const options = {
           },
         },
       },
-    ],
   },
 };
 

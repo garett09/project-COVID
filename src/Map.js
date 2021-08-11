@@ -2,9 +2,9 @@ import React from 'react'
 import"./Map.css"
 import { MapContainer as LeafletMap, TileLayer} from 'react-leaflet';
 
-function Map() {
+function Map({center, zoom}) {
     return (
-        <div className="map_box">
+        <div className="map_box" center={center} zoom={zoom}>
      <LeafletMap className="map">
        <TileLayer
          attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
