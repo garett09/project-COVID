@@ -41,7 +41,7 @@ function getPercentageChange($oldNumber, $newNumber)
 //echo abs(round(getPercentageChange($yesterdayCases, $totalCases)));
 ?>
 
-<!doctype html>
+<!DOCTYPE html>
 
 <html lang="en">
 
