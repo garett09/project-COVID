@@ -1,1 +1,1 @@
-# 🦠Project Covid19 Tracker 
+# 🦠Project COVID tracker 
